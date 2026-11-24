@@ -1,0 +1,21 @@
+services:
+  pintcheck:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pintcheck
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:4191:4191"
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 4191
+      PINTCHECK_DATA_DIR: /app/data
+      BASE_PATH: ${BASE_PATH:-}
+      APP_ORIGIN: ${APP_ORIGIN:-}
+    volumes:
+      - pintcheck_data:/app/data
+
+volumes:
+  pintcheck_data:
